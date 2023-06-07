@@ -1,0 +1,10 @@
+DATA PEMBAYARAN BULAN APRIL
+===============================================================
+NAMA		TIPE KAMAR	TAGIHAN		TANGGAL BAYAR 
+===============================================================
+LALA		Tipe A		2000000		2021-12-04
+RINI		Tipe B		1500000		2021-12-01
+KUSINA		Tipe C		1000000		2022-04-17
+SAKURA		Tipe C		1000000		BELUM BAYAR
+MILA		Tipe A		2000000		2021-12-02
+RIBKA		Tipe A		2000000		2021-12-04
