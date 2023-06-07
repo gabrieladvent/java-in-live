@@ -103,7 +103,7 @@ public class bloodPresureprediction {
         }
     }
 
-    // Fungsi untuk menghitung matriks transisi perubahan
+//     Fungsi untuk menghitung matriks transisi perubahan
     public static int[][] calculateTransitionMatrix(int[] bloodPressures) {
         int[][] transitionMatrix = new int[4][4];
 
@@ -115,6 +115,8 @@ public class bloodPresureprediction {
 
         return transitionMatrix;
     }
+
+
 
     // Fungsi untuk menghitung matriks distribusi stabil
     public static double[] calculateSteadyState(int[][] transitionMatrix) {
