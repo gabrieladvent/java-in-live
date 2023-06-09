@@ -42,6 +42,11 @@ public class HalamanAwal extends javax.swing.JFrame {
 
         pendek.setFont(new java.awt.Font("Palatino Linotype", 1, 18)); // NOI18N
         pendek.setText("Jangka Pendek");
+        pendek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pendekActionPerformed(evt);
+            }
+        });
 
         panjang.setFont(new java.awt.Font("Palatino Linotype", 1, 18)); // NOI18N
         panjang.setText("Jangka Panjang");
@@ -121,6 +126,11 @@ public class HalamanAwal extends javax.swing.JFrame {
     private void tutupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutupActionPerformed
         
     }//GEN-LAST:event_tutupActionPerformed
+
+    private void pendekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendekActionPerformed
+        JangkaPendek dialog2 = new JangkaPendek(this,true);
+        dialog2.setVisible(true);
+    }//GEN-LAST:event_pendekActionPerformed
 
     /**
      * @param args the command line arguments

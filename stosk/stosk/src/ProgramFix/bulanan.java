@@ -98,7 +98,7 @@ public static void displayVector(double[] vector) {
 }
 
 // Fungsi untuk menampilkan vektor dengan tipe data double dalam bentuk persen
-public static void displayVectorPercentage(double[] vector, String[] hypertensionCategories) {
+public static void displayVectorPercentage(double[] vector, String[] kategori) {
     DecimalFormat decimalFormat = new DecimalFormat("0.00%");
     double sum = 0.0;
     for (double value : vector) {
@@ -106,12 +106,12 @@ public static void displayVectorPercentage(double[] vector, String[] hypertensio
     }
     for (int i = 0; i < vector.length; i++) {
         double percentage = (vector[i] / sum) * 100;
-        System.out.println(hypertensionCategories[i] + ": " + decimalFormat.format(percentage / 100)); // Perubahan disini
+        System.out.println(kategori[i] + ": " + decimalFormat.format(percentage / 100)); // Perubahan disini
     }
 }
 
 // Fungsi untuk menampilkan elemen dengan persentase terbesar dari vektor prediksi
-public static void displayLargestProbability(double[] vector, String[] hypertensionCategories) {
+public static void displayLargestProbability(double[] vector, String[] kategori) {
     DecimalFormat decimalFormat = new DecimalFormat("0.00%");
     int maxIndex = 0;
     double maxProbability = vector[0];
@@ -122,7 +122,7 @@ public static void displayLargestProbability(double[] vector, String[] hypertens
         }
     }
     System.out.println("\nKemungkinan terbesar:");
-    System.out.println(hypertensionCategories[maxIndex]);
+    System.out.println(kategori[maxIndex]);
 }
 
 // Fungsi untuk menghitung prediksi jangka pendek atau jangka panjang
@@ -152,7 +152,7 @@ public static double[] calculatePrediction(double[] steadyState, double[][] prob
     
 public static void main(String[] args) {
     int[] bloodPressures;
-    String[] hypertensionCategories = {"Normal", "Pre-Hipertensi", "Hipertensi Stage 1", "Hipertensi Stage 2"};
+    String[] kategori = {"Normal", "Pre-Hipertensi", "Hipertensi Stage 1", "Hipertensi Stage 2"};
     Scanner scanner = new Scanner(System.in);
 
     // Memilih jenis data (bulanan atau mingguan)
@@ -201,15 +201,15 @@ public static void main(String[] args) {
     if (choice == 1) {
         // Menghitung prediksi jangka panjang (30 hari)
         System.out.println("\nPrediksi Jangka Panjang (30 hari):");
-        double[] longTermPrediction = calculatePrediction(steadyState, probabilityMatrix, 30);
-        displayVectorPercentage(longTermPrediction, hypertensionCategories);
-        displayLargestProbability(longTermPrediction, hypertensionCategories);
+        double[] prediksiJangkaPanjang = calculatePrediction(steadyState, probabilityMatrix, 30);
+        displayVectorPercentage(prediksiJangkaPanjang, kategori);
+        displayLargestProbability(prediksiJangkaPanjang, kategori);
     } else if (choice == 2) {
         // Menghitung prediksi jangka pendek (7 hari)
         System.out.println("\nPrediksi Jangka Pendek (7 hari):");
         double[] shortTermPrediction = calculatePrediction(steadyState, probabilityMatrix, 7);
-        displayVectorPercentage(shortTermPrediction, hypertensionCategories);
-        displayLargestProbability(shortTermPrediction, hypertensionCategories);
+        displayVectorPercentage(shortTermPrediction, kategori);
+        displayLargestProbability(shortTermPrediction, kategori);
     }
 }
 }
