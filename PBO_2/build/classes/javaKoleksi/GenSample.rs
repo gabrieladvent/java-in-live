@@ -1,0 +1,2 @@
+javaKoleksi.GenSample
+javaKoleksi.BasicGeneric
