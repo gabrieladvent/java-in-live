@@ -4,6 +4,8 @@
  */
 package GuiPredict;
 
+import java.awt.Toolkit;
+import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
 
 /**
@@ -36,11 +38,12 @@ public class HalamanAwal extends javax.swing.JFrame {
         tutup = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu Utama");
 
         jLabel1.setFont(new java.awt.Font("Eras Bold ITC", 1, 24)); // NOI18N
         jLabel1.setText("SISTEM PREDIKSI TEKANAN DARAH");
 
-        pendek.setFont(new java.awt.Font("Palatino Linotype", 1, 18)); // NOI18N
+        pendek.setFont(new java.awt.Font("Perpetua", 1, 18)); // NOI18N
         pendek.setText("Jangka Pendek");
         pendek.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -48,7 +51,7 @@ public class HalamanAwal extends javax.swing.JFrame {
             }
         });
 
-        panjang.setFont(new java.awt.Font("Palatino Linotype", 1, 18)); // NOI18N
+        panjang.setFont(new java.awt.Font("Perpetua", 1, 18)); // NOI18N
         panjang.setText("Jangka Panjang");
         panjang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,7 +59,7 @@ public class HalamanAwal extends javax.swing.JFrame {
             }
         });
 
-        tutup.setFont(new java.awt.Font("Palatino Linotype", 1, 18)); // NOI18N
+        tutup.setFont(new java.awt.Font("Perpetua", 1, 18)); // NOI18N
         tutup.setText("Tutup");
         tutup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +127,8 @@ public class HalamanAwal extends javax.swing.JFrame {
     }//GEN-LAST:event_panjangActionPerformed
 
     private void tutupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutupActionPerformed
-        
+        WindowEvent close = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
+        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(close);
     }//GEN-LAST:event_tutupActionPerformed
 
     private void pendekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendekActionPerformed
