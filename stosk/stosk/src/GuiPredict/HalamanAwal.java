@@ -124,6 +124,7 @@ public class HalamanAwal extends javax.swing.JFrame {
     private void panjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_panjangActionPerformed
         JangkaPanjang dialog1 = new JangkaPanjang(this,true);
         dialog1.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_panjangActionPerformed
 
     private void tutupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tutupActionPerformed
@@ -134,6 +135,7 @@ public class HalamanAwal extends javax.swing.JFrame {
     private void pendekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pendekActionPerformed
         JangkaPendek dialog2 = new JangkaPendek(this,true);
         dialog2.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_pendekActionPerformed
 
     /**
