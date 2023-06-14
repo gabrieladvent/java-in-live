@@ -111,8 +111,10 @@ public class JangkaPanjang extends javax.swing.JDialog {
     // Fungsi untuk menampilkan vektor dengan tipe data double
     public static void displayVector(double[] vector) {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        String[] kategori = {"Normal", "Pre-Hipertensi", "Hipertensi Stage 1", "Hipertensi Stage 2"};
         for (int i = 0; i < vector.length; i++) {
-            System.out.println(decimalFormat.format(vector[i]));
+            System.out.println("Status " + i + " (" + kategori[i] + ") memiliki probabilitas stabil sebesar " +
+                    decimalFormat.format(vector[i]) + " atau " + decimalFormat.format(vector[i] * 100) + "%.");
         }
     }
 
@@ -1113,7 +1115,7 @@ public class JangkaPanjang extends javax.swing.JDialog {
        System.out.println("\nProbabilitas Matriks Transisi:");
        displayMatrix(probabilityMatrix);
        
-       System.out.println("\nMatriks Distribusi Stabil:");
+       System.out.println("\nKondisi Steady State:");
        displayVector(steadyState);
     }//GEN-LAST:event_jButton3ActionPerformed
 

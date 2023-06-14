@@ -91,11 +91,13 @@ public static void displayMatrix(double[][] matrix) {
 
 // Fungsi untuk menampilkan vektor dengan tipe data double
 public static void displayVector(double[] vector) {
-    DecimalFormat decimalFormat = new DecimalFormat("0.00");
-    for (int i = 0; i < vector.length; i++) {
-        System.out.println(decimalFormat.format(vector[i]));
+        DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        String[] kategori = {"Normal", "Pre-Hipertensi", "Hipertensi Stage 1", "Hipertensi Stage 2"};
+        for (int i = 0; i < vector.length; i++) {
+            System.out.println("Status " + i + " (" + kategori[i] + ") memiliki probabilitas stabil sebesar " +
+                    decimalFormat.format(vector[i]) + " atau " + decimalFormat.format(vector[i] * 100) + "%.");
+        }
     }
-}
 
 // Fungsi untuk menampilkan vektor dengan tipe data double dalam bentuk persen
 public static void displayVectorPercentage(double[] vector, String[] kategori) {

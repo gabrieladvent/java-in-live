@@ -7,7 +7,6 @@ package GuiPredict;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
-import java.util.Arrays;
 
 /**
  *
@@ -32,28 +31,28 @@ public class JangkaPendek extends javax.swing.JDialog {
     double totalTensi;
     String winner;
     
-    public static int[][] calculateTransitionMatrix(int[] bloodPressures) {
+    public static int[][] TransitionMatrix(int[] data) {
     int[][] countMatrix = new int[4][4];
-    for (int i = 0; i < bloodPressures.length - 1; i++) {
-        int currentState = getState(bloodPressures[i]);
-        int nextState = getState(bloodPressures[i + 1]);
+    for (int i = 0; i < data.length - 1; i++) {
+        int currentState = getState(data[i]);
+        int nextState = getState(data[i + 1]);
         countMatrix[currentState][nextState]++;
     }
     return countMatrix;
     }
 
     // Fungsi untuk menghitung probabilitas matriks transisi
-    public static double[][] calculateProbabilityMatrix(int[][] transitionMatrix) {
-        int n = transitionMatrix.length;
+    public static double[][] ProbabilityMatrix(int[][] data) {
+        int n = data.length;
         double[][] probabilityMatrix = new double[n][n];
         for (int i = 0; i < n; i++) {
             int totalTransitions = 0;
             for (int j = 0; j < n; j++) {
-                totalTransitions += transitionMatrix[i][j];
+                totalTransitions += data[i][j];
             }
             for (int j = 0; j < n; j++) {
                 if (totalTransitions != 0) {
-                    probabilityMatrix[i][j] = (double) transitionMatrix[i][j] / totalTransitions;
+                    probabilityMatrix[i][j] = (double) data[i][j] / totalTransitions;
                 }
             }
         }
@@ -61,26 +60,26 @@ public class JangkaPendek extends javax.swing.JDialog {
     }
 
     // Fungsi untuk menghitung matriks distribusi stabil (steady state)
-    public static double[] calculateSteadyState(double[][] probabilityMatrix) {
-        int n = probabilityMatrix.length;
-        double[] steadyState = new double[n];
+    public static double[] SteadyState(double[][] data) {
+        int n = data.length;
+        double[] steady = new double[n];
         for (int i = 0; i < n; i++) {
             double sum = 0;
             for (int j = 0; j < n; j++) {
-                sum += probabilityMatrix[j][i];
+                sum += data[j][i];
             }
-            steadyState[i] = sum / n;
+            steady[i] = sum / n;
         }
-        return steadyState;
+        return steady;
     }
 
     // Fungsi untuk mendapatkan status berdasarkan tekanan darah
-    public static int getState(int bloodPressure) {
-        if (bloodPressure < 120) {
+    public static int getState(int data) {
+        if (data < 120) {
             return 0; // Normal
-        } else if (bloodPressure >= 120 && bloodPressure <= 139) {
+        } else if (data >= 120 && data <= 139) {
             return 1; // Pre-Hipertensi
-        } else if (bloodPressure >= 140 && bloodPressure <= 159) {
+        } else if (data >= 140 && data <= 159) {
             return 2; // Hipertensi Stage 1
         } else {
             return 3; // Hipertensi Stage 2
@@ -111,12 +110,14 @@ public class JangkaPendek extends javax.swing.JDialog {
     // Fungsi untuk menampilkan vektor dengan tipe data double
     public static void displayVector(double[] vector) {
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
+        String[] kategori = {"Normal", "Pre-Hipertensi", "Hipertensi Stage 1", "Hipertensi Stage 2"};
         for (int i = 0; i < vector.length; i++) {
-            System.out.println(decimalFormat.format(vector[i]));
+            System.out.println("Status " + i + " (" + kategori[i] + ") memiliki probabilitas stabil sebesar " +
+                    decimalFormat.format(vector[i]) + " atau " + decimalFormat.format(vector[i] * 100) + "%.");
         }
     }
 
-    public void displayVectorPercentage(double[] vector, String[] kategori) {
+    public void VectorPercentage(double[] vector, String[] kategori) {
     DecimalFormat decimalFormat = new DecimalFormat("0.00");
     for (double value : vector) {
         sumTotal += value;
@@ -144,7 +145,7 @@ public class JangkaPendek extends javax.swing.JDialog {
 }
 
     // Fungsi untuk menampilkan elemen dengan persentase terbesar dari vektor prediksi
-    public void displayLargestProbability(double[] vector, String[] kategori) {
+    public void LargestProbability(double[] vector, String[] kategori) {
         DecimalFormat decimalFormat = new DecimalFormat("0.00%");
         int maxIndex = 0;
         double maxProbability = vector[0];
@@ -160,7 +161,7 @@ public class JangkaPendek extends javax.swing.JDialog {
     }
 
     // Fungsi untuk menghitung prediksi jangka pendek atau jangka panjang
-    public static double[] calculatePrediction(double[] steadyState, double[][] probabilityMatrix, int days) {
+    public static double[] Prediction(double[] steadyState, double[][] probabilityMatrix, int days) {
         int n = steadyState.length;
         double[] prediction = new double[n];
         for (int i = 0; i < n; i++) {
@@ -688,13 +689,13 @@ public class JangkaPendek extends javax.swing.JDialog {
             System.out.println("Data ke-"+ (i + 1) +":" + data[i]);
         }
         
-        transitionMatrix = calculateTransitionMatrix(data);
-        probabilityMatrix = calculateProbabilityMatrix(transitionMatrix);
-        steadyState = calculateSteadyState(probabilityMatrix);
+        transitionMatrix = TransitionMatrix(data);
+        probabilityMatrix = ProbabilityMatrix(transitionMatrix);
+        steadyState = SteadyState(probabilityMatrix);
         
-        double[] shortTermPrediction = calculatePrediction(steadyState, probabilityMatrix, 7);
-        displayVectorPercentage(shortTermPrediction, kategori);
-        displayLargestProbability(shortTermPrediction, kategori);
+        double[] shortTermPrediction = Prediction(steadyState, probabilityMatrix, 7);
+        VectorPercentage(shortTermPrediction, kategori);
+        LargestProbability(shortTermPrediction, kategori);
         
         DecimalFormat decimalFormat = new DecimalFormat("0.00");
         namaPasien.setText(namaP);
@@ -715,7 +716,7 @@ public class JangkaPendek extends javax.swing.JDialog {
        System.out.println("\nProbabilitas Matriks Transisi:");
        displayMatrix(probabilityMatrix);
        
-       System.out.println("\nMatriks Distribusi Stabil:");
+       System.out.println("\nKondisi Steady State:");
        displayVector(steadyState);
     }//GEN-LAST:event_jButton3ActionPerformed
 
