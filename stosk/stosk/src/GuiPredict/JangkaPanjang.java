@@ -4,7 +4,6 @@
  */
 package GuiPredict;
 
-import GuiPredict.*;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
